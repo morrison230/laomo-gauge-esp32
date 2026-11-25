@@ -1,4 +1,4 @@
-# LAOMO GAUGE ESP32（公开版准备中）
+# LAOMO GAUGE ESP32
 
 ![老莫造物标识](assets/logo-horizontal.svg)
 
@@ -6,9 +6,9 @@
 
 ## 当前状态
 
-此目录是**待审阅的独立公开包**，尚未发布 GitHub，也不是板上正在运行的固件。`firmware/collect-v2/` 以实车验证过的 R6 采集固件为起点；后续 P5 LVGL 界面会在独立分支整理，不能把 P5 的未完成页面误称为正式全 LVGL 界面。
+**源码公开版**（2026-11-25 首次发布）。`firmware/collect-v2/` 以实车验证过的 R6 采集固件为起点；LVGL 首页迁移放在后续独立分支，未完成前不会宣称「全 LVGL 界面」。
 
-公开包不包含个人行程、GPS 原始记录、车辆身份、设备绑定信息、Wi-Fi 配置、刷写日志、编译缓存或预编译 BIN。
+本仓库是**源码仓库**，不含预编译 BIN，也**不是**某块板上正在运行的镜像。仓库不包含个人行程、GPS 原始记录、车辆身份、设备绑定信息、Wi-Fi 配置、刷写日志或编译缓存。
 
 ## 构建
 
@@ -16,12 +16,15 @@ Arduino-ESP32 core 3.3.12，板型 `esp32:esp32:esp32`，选项：`FlashSize=16M
 
 Arduino IDE 可直接打开 `firmware/collect-v2/collect-v2.ino`。先按 [HARDWARE.md](HARDWARE.md) 核对目标板与 GPS 引脚。中文文案变化后，在仓库根目录运行 `python tools/cjk_font_gen.py` 重生字模；需安装 Pillow 并设置 `LAOMO_CJK_FONT` 指向 Noto Sans SC 字体文件。
 
-## 发布前待办
+## 后续待办
 
 - 确认板卡配套 `TCA9554.h` 的包来源与再发布许可。
 - 检查 Noto Sans SC 重生的中文字模在实屏上的显示效果。
-- 完成发布前审阅与实屏验证；本地独立编译和初步敏感项扫描已通过。
-- 和阿沃核对规范版本、素材、并发改动，再确定暂拟的 MIT 代码许可和 GitHub 仓库。
+- LVGL 首页迁移：完成后作为独立分支提交，进入主线前需替换第三方商标素材。
+
+## 许可
+
+代码与文档采用 MIT 许可，见 [LICENSE](LICENSE)。`assets/logo-horizontal.svg` 及「老莫造物 / LAOMO WORKS」名称与标识的版权单独保留，不随 MIT 授权，见 [assets/LICENSE-BRAND.md](assets/LICENSE-BRAND.md)。第三方依赖与字体见 [THIRD_PARTY.md](THIRD_PARTY.md)。
 
 ## 说明
 
