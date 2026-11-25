@@ -1,6 +1,6 @@
 /* cjk_font.h —— 16x16 1bpp 中文字模（自动生成，请勿手改）
  *
- * 由 tools/cjk_font_gen.py 从 e_ui.ino / collect-v2.ino 的字符串字面量直接生成，
+ * 由 tools/cjk_font_gen.py 扫描 firmware/collect-v2 下全部 .ino 的字符串字面量生成，
  * 共 242 个字，按码点升序排列（cjkIndex 用二分查找，顺序不能乱）。
  * 改文案后请重新运行： python tools/cjk_font_gen.py
  * 字形来源：Noto Sans SC，字重 500（SIL OFL 1.1）；见 third_party/NOTO-SANS-SC-OFL.txt。

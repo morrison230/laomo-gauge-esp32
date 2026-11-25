@@ -17,7 +17,7 @@
 
 #include <Arduino.h>
 
-#define V2_APP_VERSION "collect v2 r6-sensors"
+#define V2_APP_VERSION "LAOMO GAUGE r6"
 
 /* ================= 引脚 / 频率（与已验证板子一致，不得随意改） ================= */
 #define PIN_SD_CS     15

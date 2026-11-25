@@ -22,20 +22,18 @@ import re
 import sys
 
 SRC_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "firmware", "collect-v2")
-# ★ 2026-11-14 修正：原来只扫 e_ui.ino + collect-v2.ino，导致写在 c_obd.ino 里的
-#   阶段名/结果名（如「0100探针」「已发送」）没有字模，屏幕上会渲染成空白。
-#   现在扫目录下全部 .ino（cjk_font.h 自身排除，否则会把字模注释里的字当成新字）。
-SKIP_FILES = {"cjk_font.h"}
+# 扫描 firmware/collect-v2 下全部 .ino；单个文件清单会漏掉诊断文案。
 
 
 def scan_files():
     if not os.path.isdir(SRC_DIR):
-        return []
-    return sorted(f for f in os.listdir(SRC_DIR)
-                  if f.endswith(".ino") and f not in SKIP_FILES)
+        raise SystemExit("源码目录不存在：%s" % SRC_DIR)
+    files = sorted(f for f in os.listdir(SRC_DIR) if f.endswith(".ino"))
+    if not files:
+        raise SystemExit("源码目录没有 .ino 文件：%s" % SRC_DIR)
+    return files
 
 
-SCAN_FILES = ["e_ui.ino", "collect-v2.ino"]
 OUT_H = os.path.join(SRC_DIR, "cjk_font.h")
 
 # 基础字符集：即使当前文案没用到，也先备着，避免下次改文案又要回来补
@@ -50,23 +48,17 @@ BASE = (
     "超时无数据无法解析发送失败最近失败轮询通信观察未已"
 )
 
-FONT_PATH_CANDIDATES = [
-    os.environ.get("LAOMO_CJK_FONT", ""),
-    r"C:\Windows\Fonts\NotoSansSC-VF.ttf",
-]
-
-
 def find_font():
-    for p in FONT_PATH_CANDIDATES:
-        if os.path.exists(p):
-            return p
-    raise SystemExit("找不到 Noto Sans SC 字体，请设置 LAOMO_CJK_FONT 为该字体的路径")
+    path = os.environ.get("LAOMO_CJK_FONT", "")
+    if not path or not os.path.isfile(path):
+        raise SystemExit("找不到 Noto Sans SC 字体，请设置 LAOMO_CJK_FONT 为该字体的路径")
+    return path
 
 
 def scan_used_chars():
     """从源码的字符串字面量里抽出所有非 ASCII 字符。"""
     used = set()
-    files = scan_files() or SCAN_FILES
+    files = scan_files()
     for fn in files:
         path = os.path.join(SRC_DIR, fn)
         if not os.path.exists(path):
@@ -117,7 +109,7 @@ def build_header(chars, glyphs):
     lines = []
     lines.append("/* cjk_font.h —— 16x16 1bpp 中文字模（自动生成，请勿手改）")
     lines.append(" *")
-    lines.append(" * 由 tools/cjk_font_gen.py 从 e_ui.ino / collect-v2.ino 的字符串字面量直接生成，")
+    lines.append(" * 由 tools/cjk_font_gen.py 扫描 firmware/collect-v2 下全部 .ino 的字符串字面量生成，")
     lines.append(" * 共 %d 个字，按码点升序排列（cjkIndex 用二分查找，顺序不能乱）。" % len(chars))
     lines.append(" * 改文案后请重新运行： python tools/cjk_font_gen.py")
     lines.append(" * 字形来源：Noto Sans SC，字重 500（SIL OFL 1.1）；见 third_party/NOTO-SANS-SC-OFL.txt。")
