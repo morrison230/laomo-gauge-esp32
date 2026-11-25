@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 256" role="img" aria-labelledby="title desc">
+  <title id="title">LAOMO WORKS horizontal logo</title>
+  <desc id="desc">Personal maker brand for hardware and software projects.</desc>
+  <g transform="translate(22 12) scale(.9)">
+    <path d="M40 174C36 108 73 55 128 55s92 53 88 119" fill="none" stroke="#32D5CF" stroke-width="17" stroke-linecap="round"/>
+    <path d="m68 178 24-67 36 49 36-49 24 67" fill="none" stroke="#F4F7F8" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="216" cy="174" r="10" fill="#FFB454"/>
+  </g>
+  <text x="280" y="132" fill="#F4F7F8" font-family="Arial, Helvetica, sans-serif" font-size="89" font-weight="800" letter-spacing="4">LAOMO</text>
+  <path d="M283 160h497" stroke="#32434C" stroke-width="2"/>
+  <text x="282" y="210" fill="#32D5CF" font-family="Arial, Helvetica, sans-serif" font-size="37" font-weight="700" letter-spacing="17">WORKS</text>
+</svg>

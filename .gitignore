@@ -1,0 +1,49 @@
+# Build outputs and generated files
+build/
+out/
+build-*/
+out-*/
+*.bin
+*.elf
+*.map
+*.hex
+*.uf2
+*.o
+*.d
+compile*.log
+
+# Vehicle and device data
+evidence/
+raw/
+logs/
+trips/
+*.jsonl
+*.csv
+*.db
+*.sqlite
+*.pcap
+*.pcapng
+*.nvs
+*.dump
+*.bak
+
+# Local settings and credentials
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+credentials*
+secrets*
+
+# Editors and Python
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Internal release review, not part of the public repository
+PUBLISH-CHECKLIST.md
